@@ -5,8 +5,10 @@ set -u
 
 
 if [[ $# -eq 0 ]]; then
-  echo "Usage: $(basename $0) <reload>"
-  exit 1
+#echo "Usage: $(basename $0) <reload>"
+#  exit 1
+  cd $PANDA_HOME
+  exit 0
 fi
 
 case $1 in

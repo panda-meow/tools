@@ -1,3 +1,9 @@
 export PANDA_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
-PATH="$PATH:$PANDA_HOME/CLI/bin"
+panda () {
+  if [[ $# -eq 0 ]]; then
+    cd $PANDA_HOME
+  else
+    $PANDA_HOME/tools/bin/panda $@
+  fi
+}
