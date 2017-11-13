@@ -33,7 +33,7 @@ error() {
 
 PANDA_HOME="$(pwd)/Panda.Meow"
 
-mkdir $PANDA_HOME || {
+mkdir $PANDA_HOME 2> /dev/null || {
   error "Panda.Meow is already installed"
   exit 1
 }
@@ -64,3 +64,5 @@ brew tap | grep -q 'vapor/tap' || {
 
 status "Installing Vapor"
 brew install vapor
+
+echo -e "\n$(green Installation Successful) 🐼 " 
