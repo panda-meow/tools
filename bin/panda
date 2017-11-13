@@ -5,13 +5,22 @@ set -u
 
 
 if [[ $# -eq 0 ]]; then
-#echo "Usage: $(basename $0) <reload>"
-#  exit 1
   cd $PANDA_HOME
   exit 0
 fi
 
 case $1 in
+  help)
+    echo "Usage: panda <reload|code|xcode|help>"
+  ;;
+  xcode)
+    cd $PANDA_HOME/tail
+    vapor xcode -y 
+  ;;
+  code)
+    cd $PANDA_HOME/whiskers
+    code .
+  ;;
   reload)
     echo -n "Reloading... "
     { curl -X POST http://localhost:8080/heroes/reload 2> /dev/null && echo "[OK]"; } || echo "[FAIL]"
