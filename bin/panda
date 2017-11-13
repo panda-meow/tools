@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+set -u
+
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: $(basename $0) <reload>"
+  exit 1
+fi
+
+case $1 in
+  reload)
+    echo -n "Reloading... "
+    { curl -X POST http://localhost:8080/heroes/reload 2> /dev/null && echo "[OK]"; } || echo "[FAIL]"
+  ;;
+  *)
+    echo "Invalid Command: $1"
+  ;;
+esac

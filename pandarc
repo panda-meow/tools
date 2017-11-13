@@ -1,0 +1,3 @@
+export PANDA_HOME="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
+PATH="$PATH:$PANDA_HOME/CLI/bin"
