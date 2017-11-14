@@ -65,4 +65,8 @@ brew tap | grep -q 'vapor/tap' || {
 status "Installing Vapor"
 brew install vapor
 
+status "Installing Whiskers"
+cd $PANDA_HOME/whiskers
+npm -i
+
 echo -e "\n$(green Installation Successful) 🐼 " 

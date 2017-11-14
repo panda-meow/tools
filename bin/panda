@@ -11,7 +11,11 @@ fi
 
 case $1 in
   help)
-    echo "Usage: panda <reload|code|xcode|help>"
+    echo "Usage: panda <angular|reload|code|xcode|help>"
+  ;;
+  angular)
+    cd $PANDA_HOME/whiskers
+    npm start
   ;;
   xcode)
     cd $PANDA_HOME/tail
