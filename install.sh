@@ -40,16 +40,16 @@ mkdir $PANDA_HOME 2> /dev/null || {
 
 cd $PANDA_HOME
 
-status "Installing Panda.Meow/tail"
+status "Downloading Panda.Meow/tail"
 git clone https://github.com/panda-meow/tail.git
 
-status "Installing Panda.Meow/tools"
+status "Downloading Panda.Meow/tools"
 git clone https://github.com/panda-meow/tools.git
 
-status "Installing Panda.Meow/content"
+status "Downloading Panda.Meow/content"
 git clone https://github.com/panda-meow/content.git
 
-status "Installing Panda.Meow/whiskers"
+status "Downloading Panda.Meow/whiskers"
 git clone https://github.com/panda-meow/whiskers.git
 
 status "Updating .bashrc" 
@@ -67,6 +67,6 @@ brew install vapor
 
 status "Installing Whiskers"
 cd $PANDA_HOME/whiskers
-npm -i
+npm i
 
 echo -e "\n$(green Installation Successful) 🐼 " 
