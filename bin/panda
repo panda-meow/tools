@@ -13,6 +13,14 @@ case $1 in
   help)
     echo "Usage: panda <angular|reload|code|xcode|help>"
   ;;
+  vapor-build)
+    cd $PANDA_HOME/tail
+    vapor build
+  ;;
+  vapor)
+    cd $PANDA_HOME/tail
+    vapor run
+  ;;
   angular)
     cd $PANDA_HOME/whiskers
     npm start
