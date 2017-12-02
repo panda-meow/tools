@@ -3,15 +3,16 @@
 set -e
 set -u
 
-
 if [[ $# -eq 0 ]]; then
   cd $PANDA_HOME
   exit 0
 fi
 
+source $PANDA_HOME/tools/lib/panda-lib.sh
+
 case $1 in
   help)
-    echo "Usage: panda <angular|reload|code|xcode|help|vapor-build|vapor>"
+    echo "Usage: panda <angular|reload|code|xcode|help|vapor-build|vapor|ssh>"
   ;;
   vapor-build)
     cd $PANDA_HOME/tail
@@ -32,6 +33,31 @@ case $1 in
   code)
     cd $PANDA_HOME/whiskers
     code .
+  ;;
+  ssh-root)
+    server-init
+    ssh -oBatchMode=yes root@$SERVER_IP 2> /dev/null || \
+        error "Public key authentication is not enabled. Run $(green server-setup) to fix."
+  ;;
+  ssh)
+    server-init
+    ssh -oBatchMode=yes panda@$SERVER_IP 2> /dev/null || \
+        error "Public key authentication is not enabled. Run $(green server-setup) to fix."
+  ;;
+  server-setup)
+    server-init
+    server-setup
+  ;;
+  server-info)
+    server-init
+    echo $SERVER_IP
+  ;;
+  server-install)
+    server-init
+    ssh -oBatchMode=yes root@$SERVER_IP "bash -s" < $PANDA_HOME/tools/lib/server-install.sh
+  ;;
+  server-config)
+    . $PANDA_HOME/tools/lib/panda-config.sh
   ;;
   reload)
     echo -n "Reloading... "
