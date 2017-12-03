@@ -3,6 +3,8 @@
 set -e
 set -u
 
+alias apt-get='apt-get -o Acquire::ForceIPv4=true'
+
 function add_vapor_apt() {
     eval "$(cat /etc/lsb-release)"
 
@@ -51,7 +53,6 @@ function add_vapor_apt() {
 
 
 curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-alias apt-get='apt-get -o Acquire::ForceIPv4=true'
 add_vapor_apt;
 
 apt-get -y update
