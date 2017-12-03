@@ -49,8 +49,16 @@ function add_vapor_apt() {
 
 # echo "export PATH=$HOME/swift/usr/bin:\"\${PATH}\"" >> ~/.bashrc
 
+
+curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 alias apt-get='apt-get -o Acquire::ForceIPv4=true'
 add_vapor_apt;
 
 apt-get -y update
-apt-get -y install vapor
+apt-get -y install git vapor nodejs 
+
+cd ~panda
+
+sudo -u panda git clone https://github.com/panda-meow/tail.git
+sudo -u panda git clone https://github.com/panda-meow/whiskers.git
+sudo -u panda git clone https://github.com/panda-meow/content.git

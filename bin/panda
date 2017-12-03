@@ -48,6 +48,18 @@ case $1 in
     server-init
     server-setup
   ;;
+  server-deploy)
+    server-init
+		ssh root@$SERVER_IP "bash -s" << END
+
+		id panda &> /dev/null || sudo useradd panda -m -s /bin/bash
+		sudo -u panda mkdir -p /home/panda/.ssh 
+		sudo -u panda touch /home/panda/.ssh/authorized_keys
+		cat id_rsa.pub >> /home/panda/.ssh/authorized_keys
+		rm id_rsa.pub
+
+END
+  ;;
   server-info)
     server-init
     echo $SERVER_IP
