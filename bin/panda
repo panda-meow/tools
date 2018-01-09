@@ -26,6 +26,10 @@ case $1 in
     cd $PANDA_HOME/whiskers
     npm start
   ;;
+  angular)
+    cd $PANDA_HOME/whiskers
+    npm start
+  ;;
   xcode)
     cd $PANDA_HOME/tail
     vapor xcode -y 
@@ -73,7 +77,7 @@ END
   ;;
   reload)
     echo -n "Reloading... "
-    { curl -X POST http://localhost:8080/heroes/reload 2> /dev/null && echo "[OK]"; } || echo "[FAIL]"
+    { curl -X POST http://localhost:8080/projects/reload 2> /dev/null && echo "[OK]"; } || echo "[FAIL]"
   ;;
   *)
     echo "Invalid Command: $1"
