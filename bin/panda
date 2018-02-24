@@ -22,9 +22,9 @@ case $1 in
     cd $PANDA_HOME/tail
     vapor run
   ;;
-  angular)
+  angular-prod)
     cd $PANDA_HOME/whiskers
-    npm start
+    npm run build
   ;;
   angular)
     cd $PANDA_HOME/whiskers
@@ -34,18 +34,29 @@ case $1 in
     cd $PANDA_HOME/tail
     vapor xcode -y 
   ;;
+  deploy-content)
+    server-init
+    COMMAND='cd content && git pull origin master && { curl -X POST http://localhost:8080/projects/reload 2> /dev/null && echo "[OK]"; } || echo "[FAIL]"'
+    ssh -oBatchMode=yes panda@$SERVER_IP $COMMAND 2> /dev/null || \
+        error "Public key authentication is not enabled. Run $(green server-setup) to fix."
+  ;;
+  deploy-angular)
+    server-init
+    cd $PANDA_HOME/whiskers
+    npm run-script build && echo '**** DEPLOYING ****' && rsync -avzh --delete --progress dist/* root@chelseapattee.com:/var/www/html && echo '**** SUCCESS  ****'
+  ;;
   code)
     cd $PANDA_HOME/whiskers
     code .
   ;;
   ssh-root)
     server-init
-    ssh -oBatchMode=yes root@$SERVER_IP 2> /dev/null || \
+    ssh -oBatchMode=yes root@$SERVER_IP "${@:2}" 2> /dev/null || \
         error "Public key authentication is not enabled. Run $(green server-setup) to fix."
   ;;
   ssh)
     server-init
-    ssh -oBatchMode=yes panda@$SERVER_IP 2> /dev/null || \
+    ssh -oBatchMode=yes panda@$SERVER_IP "${@:2}" 2> /dev/null || \
         error "Public key authentication is not enabled. Run $(green server-setup) to fix."
   ;;
   server-setup)
